@@ -6,13 +6,8 @@ Add a 1-2 line summary of your project here.
 
 ## Important Links
 
-| [Timesheet](https://google.com) | [Slack channel](https://google.com) | [Project report](https://google.com) |
+| [Timesheet](https://1sfu-my.sharepoint.com/:x:/g/personal/hamarneh_sfu_ca/ERekhh3WcIJFiFAbFqt5bpkB1A5hviZGSfY0xAEeKkKm4Q?e=TQPpXc) | [Slack channel](https://app.slack.com/client/T07K7SWL5A4/C07JS13BQUT) | [Project report](https://www.overleaf.com/project/66d0af91ae7460ea9a4852ad) |
 |-----------|---------------|-------------------------|
-
-
-- Timesheet: Link your timesheet (pinned in your project's Slack channel) where you track per student the time and tasks completed/participated for this project/
-- Slack channel: Link your private Slack project channel.
-- Project report: Link your Overleaf project report document.
 
 
 ## Video/demo/GIF
