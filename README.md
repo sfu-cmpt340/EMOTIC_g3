@@ -4,6 +4,13 @@ Replace the title with your project title, and **add a snappy acronym that peopl
 
 Add a 1-2 line summary of your project here.
 
+## Team Members
+1. 
+2. Edan Stasiuk
+3.
+4.
+5.
+
 ## Important Links
 
 | [Timesheet](https://1sfu-my.sharepoint.com/:x:/g/personal/hamarneh_sfu_ca/ERekhh3WcIJFiFAbFqt5bpkB1A5hviZGSfY0xAEeKkKm4Q?e=TQPpXc) | [Slack channel](https://app.slack.com/client/T07K7SWL5A4/C07JS13BQUT) | [Project report](https://www.overleaf.com/project/66d0af91ae7460ea9a4852ad) |
