@@ -9,7 +9,7 @@ Add a 1-2 line summary of your project here.
 2. Edan Stasiuk
 3. Rashed Hadi
 4. Zihao Xie
-5.
+5. Daniel Kim
 
 ## Important Links
 
