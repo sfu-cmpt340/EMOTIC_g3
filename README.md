@@ -5,9 +5,9 @@ Replace the title with your project title, and **add a snappy acronym that peopl
 Add a 1-2 line summary of your project here.
 
 ## Team Members
-1. 
+1. Maisha Supritee Chowdhury
 2. Edan Stasiuk
-3.
+3. Rashed Hadi
 4.
 5.
 
