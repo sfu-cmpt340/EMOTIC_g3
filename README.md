@@ -8,7 +8,7 @@ Add a 1-2 line summary of your project here.
 1. Maisha Supritee Chowdhury
 2. Edan Stasiuk
 3. Rashed Hadi
-4.
+4. Zihao Xie
 5.
 
 ## Important Links
