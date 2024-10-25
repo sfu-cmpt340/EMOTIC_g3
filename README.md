@@ -1,8 +1,6 @@
-# SFU CMPT 340 Project Template -- Replace with project title
-This repository is a template for your CMPT 340 course project.
-Replace the title with your project title, and **add a snappy acronym that people remember (mnemonic)**.
+# SFU CMPT 340 Project - EMOTIC - EEG Monitoring of Thoughts and Individual Conditions
 
-Add a 1-2 line summary of your project here.
+A project using EEG data from the MindWave Mobile 2 to analyze and interpret users' emotional states through neural signal processing and machine learning.
 
 ## Team Members
 1. Maisha Supritee Chowdhury
