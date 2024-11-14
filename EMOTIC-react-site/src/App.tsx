@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import emoticDarkLogo from '/logo_dark.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingPage from "./components/pages/landing/LandingPage";
+import { useEffect } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  useEffect(() => {
+    // Function to set `dark` class based on color scheme
+    const updateTheme = () => {
+      const darkMode = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      if (darkMode) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    };
+
+    // Initial theme setup
+    updateTheme();
+
+    // Listen for changes in the color scheme
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", updateTheme);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .removeEventListener("change", updateTheme);
+    };
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="" target="_blank">
-          <img src={emoticDarkLogo} className="logo" alt="EMOTIC logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>EMOTIC</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route index path="/" element={<LandingPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
-
-export default App

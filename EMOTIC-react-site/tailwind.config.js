@@ -26,27 +26,27 @@ export default {
         darkColorHero: { // Magenta for hero components in dark mode
           500: "#BA51F9",
         },
-        textLight: { // Color for text in light mode
+        lightText: { // Color for text in light mode
           100: "#FFFFFF", // White text on a colored background
           500: "#514F4F", // Hero text
-          900: "000000", // Black text on a light background
+          900: "#000000", // Black text on a light background
         },
-        darkLight: { // Color for text in dark mode
-          100: "000000", // Black text on a colored background
-          500: "D8D5D5", // Hero text
-          900: "FFFFFF", // White text on a dark background
+        darkText: { // Color for text in dark mode
+          100: "#000000", // Black text on a colored background
+          500: "#D8D5D5", // Hero text
+          900: "#FFFFFF", // White text on a dark background
         },
         lightBorder: { // Color of border in light mode
           500: "#DBDEE2",
         },
         darkBorder: { // Color of border in dark mode
-          500: "FCFCFC",
+          500: "#FCFCFC",
         },
         iconLight: { // Color of icons in light mode
           500: "#363636",
         },
         iconDark: {  // Color of icons in dark mode
-          500: "FCFCFC",
+          500: "#FCFCFC",
         }
       },
     },
