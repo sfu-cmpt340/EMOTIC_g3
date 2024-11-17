@@ -38,7 +38,7 @@ const DragAndDropUpload: React.FC<DragAndDropUploadProps> = ({
 
   return (
     <div
-      className={`border-2 border-dashed rounded-lg py-10 px-16 m-4 flex flex-col items-center justify-center text-center transition-all ${
+      className={`border-2 border-dashed rounded-lg py-10 px-16 mx-10 flex flex-col items-center justify-center text-center transition-all ${
         isDragging
           ? "border-lightColorHero-500 dark:border-darkBorder-500 dark:border-opacity-65 bg-lightColorHero-500 bg-opacity-35 dark:bg-darkBackground-300 dark:bg-opacity-65"
           : "border-lightColorHero-500 dark:border-darkText-500"
