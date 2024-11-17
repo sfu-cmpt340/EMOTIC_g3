@@ -10,6 +10,7 @@ const DragAndDropUpload: React.FC<DragAndDropUploadProps> = ({
   onFileSelect,
 }) => {
   const [isDragging, setIsDragging] = useState(false);
+  const [error, setError] = useState<string | null>(null); // State for error messages
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -23,16 +24,27 @@ const DragAndDropUpload: React.FC<DragAndDropUploadProps> = ({
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDragging(false);
+
     const file = e.dataTransfer.files?.[0];
     if (file) {
-      onFileSelect(file);
+      validateAndSelectFile(file);
     }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      validateAndSelectFile(file);
+    }
+  };
+
+  const validateAndSelectFile = (file: File) => {
+    if (file.type === "text/csv" || file.name.endsWith(".csv")) {
+      setError(null); // Clear any previous errors
       onFileSelect(file);
+    } else {
+      setError("Only CSV files are allowed. Please select a valid file.");
+      onFileSelect(null); // Reset the selected file
     }
   };
 
@@ -63,6 +75,7 @@ const DragAndDropUpload: React.FC<DragAndDropUploadProps> = ({
         className="hidden"
         onChange={handleFileChange}
       />
+      {error && <p className="text-red-500 mt-4 text-sm font-normal dark:font-light">{error}</p>}
     </div>
   );
 };
