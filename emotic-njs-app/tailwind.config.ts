@@ -19,6 +19,7 @@ export default {
           600: "#DBDEE2", // Sidebar background
         },
         darkBackground: {
+          300: "#303443", // Drag and drop background
           500: "#252836", // Main stage and sidebar background
         },
         lightColorHero: { // Blue for hero components in light mode

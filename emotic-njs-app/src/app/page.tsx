@@ -4,21 +4,16 @@ import { useState } from "react";
 import Sidebar from "./components/Sidebar";
 import Image from "next/image";
 import { useLogo } from "./hooks/useLogo";
+import DragAndDropUpload from "./components/DragAndDropUpload"; // Adjust path based on your file structure
 
-// Define the types for the event handlers
 export default function LandingPage() {
   const logo = useLogo();
   const [file, setFile] = useState<File | null>(null);
 
-  // Type for the file change event
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0];
-    if (selectedFile) {
-      setFile(selectedFile);
-    }
+  const handleFileSelect = (selectedFile: File | null) => {
+    setFile(selectedFile);
   };
 
-  // Type for the upload function
   const handleUpload = async () => {
     if (!file) return alert("Please select a file to upload.");
 
@@ -61,24 +56,22 @@ export default function LandingPage() {
               />
             </a>
           </div>
-          <div className="text-[30px] -mt-4">
+          <div className="text-[30px] -mt-4 text-center">
             EEG Monitoring of Thoughts and Individual Conditions
           </div>
 
-          {/* File upload button */}
-          <div className="mt-8 flex flex-col items-center">
-            <input
-              type="file"
-              accept=".csv"
-              onChange={handleFileChange}
-              className="mb-4 p-2 border border-gray-300 rounded"
-            />
-            <button
-              onClick={handleUpload}
-              className="px-6 py-3 bg-lightColorHero-500 dark:bg-darkColorHero-500 text-lightText-100 dark:text-darkText-100 font-inter font-medium text-lg rounded-full"
-            >
-              Upload EEG Data
-            </button>
+          {/* Drag-and-Drop File Upload */}
+          <div className="flex items-center justify-center w-full mt-12 bg-lightBackground-500 dark:bg-darkBackground-500">
+            <div className="flex flex-col items-center">
+              <DragAndDropUpload onFileSelect={handleFileSelect} />
+              <button
+                onClick={handleUpload}
+                disabled={!file}
+                className="mt-4 px-6 py-3 bg-lightColorHero-500 dark:bg-darkColorHero-500 text-lightText-100 dark:text-darkText-100 font-inter font-medium text-lg rounded-md disabled:opacity-45 disabled:cursor-not-allowed"
+              >
+                {file ? `Upload: ${file.name}` : "Upload EEG Data"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
