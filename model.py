@@ -18,10 +18,10 @@ def preprocessInputs(dataframe, labelMap):
 
     # copying just the label column
     y = dataframe['label'].copy()
-    x = dataframe.drop('label', axis=1).copy() #dropping just the label column
+    x = dataframe.drop('label', axis=1).copy() # dropping just the label column
 
     # splitting the data into training and testing sets
-    x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, random_state=12)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.8, random_state=12)
     return x_train, x_test, y_train, y_test
 
 
@@ -72,8 +72,9 @@ def buildModel(x_train, y_train):
 
 # Results
 def results(model, history, x_test, y_test):
-    model_acc = model.evaluate(x_test, y_test, verbose=0)[1] # returns loss and accuracy, for only accuracy get the val at index =1
+    model_loss, model_acc = model.evaluate(x_test, y_test, verbose=0) # returns loss and accuracy, for only accuracy get the val at index =1
     print("Test Accuracy: {:.3f}%".format(model_acc * 100)) # multiply by 100 to get percentage, and getting 3 decimal places
+    print("Test Loss: {:.3f}%".format(model_loss))
 
     # model.predict will return multiple sets of 3 probability values, one for each class
     # np.max will give largest number within the 3 and np.argmax will give the location of the largest number
@@ -99,9 +100,9 @@ def results(model, history, x_test, y_test):
 
 # reading the data
 data = pd.read_csv('data/emotions.csv')
-#half of the dataset has _a suffix and half has _b suffix, the fft ones look like timeseries data
-#the whole dataset is not one continuous timeseries and plotting everything just shows 2 impulses probably from some max values but for now we will assume it is timeseries data
-#label column has 3 classes: NEUTRAL, NEGATIVE, POSITIVE
+# half of the dataset has _a suffix and half has _b suffix, the fft ones look like timeseries data
+# the whole dataset is not one continuous timeseries and plotting everything just shows 2 impulses probably from some max values but for now we will assume it is timeseries data
+# label column has 3 classes: NEUTRAL, NEGATIVE, POSITIVE
 
 counts = data['label'].value_counts()
 NEUTRAL = counts.iloc[0]
