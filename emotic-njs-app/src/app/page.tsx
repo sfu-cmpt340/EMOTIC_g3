@@ -4,7 +4,7 @@ import { useState } from "react";
 import Sidebar from "./components/Sidebar";
 import Image from "next/image";
 import { useLogo } from "./hooks/useLogo";
-import DragAndDropUpload from "./components/DragAndDropUpload"; // Adjust path based on your file structure
+import DragAndDropUpload from "./components/DragAndDropUpload";
 
 export default function LandingPage() {
   const logo = useLogo();
@@ -48,7 +48,7 @@ export default function LandingPage() {
             <p className="text-[45px] sm:text-[65px] md:text-[80px] lg:text-[100px]">
               EMOTIC
             </p>
-            <a href="" target="_blank">
+            <a href="/" target="_blank">
               <Image
                 src={logo}
                 className="h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 ml-4 hover:scale-110 transition-transform duration-200"
