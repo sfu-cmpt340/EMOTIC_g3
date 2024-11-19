@@ -11,7 +11,7 @@ export default function Sidebar() {
   return (
     <div className="min-h-screen w-[88px] bg-lightBackground-500 dark:bg-darkBackground-500 flex flex-col items-center py-4 border-r border-lightBorder-500 dark:border-darkBorder-500">
       {/* Home/Logo Icon */}
-      <a href="" target="_blank">
+      <a href="/" target="_blank">
         <Image
           src={logo}
           className="h-12 w-12 my-6 hover:scale-110 transition-transform duration-200"
