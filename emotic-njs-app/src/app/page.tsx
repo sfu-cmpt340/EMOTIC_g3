@@ -21,7 +21,7 @@ export default function LandingPage() {
     formData.append("file", file);
 
     try {
-      const response = await fetch("/upload", {
+      const response = await fetch("http://localhost:5000/upload", {
         method: "POST",
         body: formData,
       });
@@ -43,9 +43,9 @@ export default function LandingPage() {
         <Sidebar />
       </div>
       <div className="flex-1 min-h-screen flex justify-center bg-lightBackground-500 dark:bg-darkBackground-500">
-        <div className="justify-center mt-[15%] font-montserrat font-extralight text-lightText-500 dark:text-darkText-500">
+        <div className="justify-center mt-[15%] sm:mt-[15%] md:mt-[10%] font-montserrat font-extralight text-lightText-500 dark:text-darkText-500">
           <div className="flex items-center justify-center">
-            <p className="text-[60px] sm:text-[80px] md:text-[100px] lg:text-[120px]">
+            <p className="text-[45px] sm:text-[65px] md:text-[80px] lg:text-[100px]">
               EMOTIC
             </p>
             <a href="" target="_blank">
