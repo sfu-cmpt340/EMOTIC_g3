@@ -1,10 +1,11 @@
-/** @type {import('tailwindcss').Config} */
+import type { Config } from "tailwindcss";
+
 export default {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -12,12 +13,13 @@ export default {
         inter: ["Inter"],
         montserrat: ["Montserrat"],
       },
-      colors: { // NOTE: Names coorispond with the theme the browser is in, not with the parity of the color
+      colors: { // NOTE: Names correspond with the theme the browser is in, not with the parity of the color
         lightBackground: {
           500: "#FCFCFC", // Main stage background
           600: "#DBDEE2", // Sidebar background
         },
         darkBackground: {
+          300: "#303443", // Drag and drop background
           500: "#252836", // Main stage and sidebar background
         },
         lightColorHero: { // Blue for hero components in light mode
@@ -52,5 +54,4 @@ export default {
     },
   },
   plugins: [],
-}
-
+} satisfies Config;
