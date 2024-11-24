@@ -9,7 +9,7 @@ export default function Sidebar() {
   const logo = useLogo();
 
   return (
-    <div className="min-h-screen w-[88px] bg-lightBackground-500 dark:bg-darkBackground-500 flex flex-col items-center py-4 border-r border-lightBorder-500 dark:border-darkBorder-500">
+    <div className="h-full w-[88px] bg-lightBackground-500 dark:bg-darkBackground-500 flex flex-col items-center py-4 border-r border-lightBorder-500 dark:border-darkBorder-500">
       {/* Home/Logo Icon */}
       <a href="/" target="_blank">
         <Image

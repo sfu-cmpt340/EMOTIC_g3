@@ -42,8 +42,8 @@ export default function LandingPage() {
       <div className="">
         <Sidebar />
       </div>
-      <div className="flex-1 min-h-screen flex justify-center bg-lightBackground-500 dark:bg-darkBackground-500">
-        <div className="justify-center mt-[15%] sm:mt-[15%] md:mt-[10%] font-montserrat font-extralight text-lightText-500 dark:text-darkText-500">
+      <div className="flex-1 min-h-screen pt-[5%] px-[5%] sm:px-[10%] flex justify-center bg-lightBackground-500 dark:bg-darkBackground-500">
+        <div className="justify-center pb-20 font-montserrat font-extralight text-lightText-500 dark:text-darkText-500">
           <div className="flex items-center justify-center">
             <p className="text-[45px] sm:text-[65px] md:text-[80px] lg:text-[100px]">
               EMOTIC
