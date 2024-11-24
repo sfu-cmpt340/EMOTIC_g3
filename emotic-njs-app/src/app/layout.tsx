@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import FaviconSwitcher from "./components/FaviconSwitcher";
+import FaviconSwitcher from "./components/landing/FaviconSwitcher";
 import ThemeUpdater from "./ThemeUpdater";
 
 export const metadata: Metadata = {

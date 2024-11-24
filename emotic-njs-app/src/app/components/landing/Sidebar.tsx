@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { VscGithub } from "react-icons/vsc";
 import Image from "next/image";
-import { useLogo } from "../hooks/useLogo";
+import { useLogo } from "../../hooks/useLogo";
 
 export default function Sidebar() {
   const logo = useLogo();

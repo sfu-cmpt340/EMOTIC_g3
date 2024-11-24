@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./components/landing/Sidebar";
 import Image from "next/image";
 import { useLogo } from "./hooks/useLogo";
-import DragAndDropUpload from "./components/DragAndDropUpload";
+import DragAndDropUpload from "./components/landing/DragAndDropUpload";
 
 export default function LandingPage() {
   const logo = useLogo();
