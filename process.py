@@ -2,6 +2,9 @@ import os
 import pickle
 import numpy as np
 
+def downsample(data, factor):
+    return data.reshape(data.shape[0], data.shape[1], data.shape[2], -1, factor).mean(axis=-1)
+
 # Loop across all 100 subjects (training data)
 eeg_data = []
 for file_name in os.listdir("Processed_data_train"):
@@ -14,6 +17,8 @@ for file_name in os.listdir("Processed_data_train"):
 
 # Convert the list of arrays into a single NumPy array
 eeg_data = np.array(eeg_data)  # Shape: (100, num_videos, num_channels, num_timepoints)
+
+eeg_data = downsample(eeg_data, 2) # A factor of 2 will compress the number of time points by half
 
 # Get the emotions for each video
 emotions = ["Anger", "Anger", "Anger",
