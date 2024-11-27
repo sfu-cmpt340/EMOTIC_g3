@@ -39,7 +39,7 @@ export default function LandingPage() {
 
   return (
     <div className="flex">
-      <div className="">
+      <div>
         <Sidebar />
       </div>
       <div className="flex-1 min-h-screen pt-[5%] px-[5%] sm:px-[10%] flex justify-center bg-lightBackground-500 dark:bg-darkBackground-500">
