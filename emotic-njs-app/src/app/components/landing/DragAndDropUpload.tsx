@@ -66,7 +66,7 @@ const DragAndDropUpload: React.FC<DragAndDropUploadProps> = ({
         htmlFor="file-input"
         className="cursor-pointer mt-2 bg-lightColorHero-500 dark:bg-darkColorHero-500 text-lightText-100 dark:text-darkText-100 font-inter font-medium text-base px-4 py-2 rounded-md"
       >
-        Upload Files
+        Upload File
       </label>
       <input
         id="file-input"

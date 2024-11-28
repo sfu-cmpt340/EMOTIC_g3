@@ -82,8 +82,8 @@ export default function AppPage() {
               <div className="mb-12">
                 <CircularIndeterminate />
               </div>
-              <p className="text-2xl">Processing EEG data...</p>
-              <p className="text-lg">This may take a few minutes.</p>
+              <p className="text-2xl font-montserrat">Processing EEG data...</p>
+              <p className="text-lg font-montserrat">This may take a few minutes.</p>
             </>
           ) : emotion ? (
             <>

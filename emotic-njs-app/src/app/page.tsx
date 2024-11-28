@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Sidebar from "./components/landing/Sidebar";
 import Image from "next/image";
 import { useLogo } from "./hooks/useLogo";
@@ -9,6 +10,7 @@ import DragAndDropUpload from "./components/landing/DragAndDropUpload";
 export default function LandingPage() {
   const logo = useLogo();
   const [file, setFile] = useState<File | null>(null);
+  const router = useRouter();
 
   const handleFileSelect = (selectedFile: File | null) => {
     setFile(selectedFile);
@@ -27,7 +29,10 @@ export default function LandingPage() {
       });
 
       if (response.ok) {
-        alert("File uploaded successfully!");
+        // If the upload is successful, navigate to the /app page
+        const responseData = await response.json(); // Assuming the server responds with some data
+        const filename = responseData.filename; // Replace this with the actual field from the backend response
+        router.push(`/app?filename=${encodeURIComponent(filename)}`); // Pass filename as query parameter
       } else {
         alert("Error uploading file.");
       }
