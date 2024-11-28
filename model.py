@@ -36,7 +36,7 @@ def buildModel(x_train, y_train):
     # Recurrent neural network: take in new input and previous output 
     #gated recurrent units tend to work better on smaller datasets. Using 32 units in the GRU for each of our examples
     # having return_sequences=True will return the output for each input, not just the last one as a 2D array. Improves performance.
-    gated_recurrent_unit = tf.keras.layers.GRU(32, return_sequences=True)(reshaped)
+    gated_recurrent_unit = tf.keras.layers.GRU(128, return_sequences=True)(reshaped)
     flatten = tf.keras.layers.Flatten()(gated_recurrent_unit)
 
     outputs = tf.keras.layers.Dense(9, activation='softmax')(flatten) # probability values for 9 classes: Anger, Disgust, Fear, Sadness, Neutral, Amusement, Inspiration, Joy, Tenderness. And softmax makes the probabilities such that they all add upto 1
@@ -55,7 +55,7 @@ def buildModel(x_train, y_train):
         y_train,
         validation_split=0.2,
         batch_size=32,
-        epochs=10,
+        epochs=25,
         callbacks=[
             tf.keras.callbacks.EarlyStopping( # take a look at the validation loss after each epoch
                 monitor='val_loss',
@@ -65,10 +65,11 @@ def buildModel(x_train, y_train):
         ]
     )
     model.save("model.keras")
+    print(model.metrics_names)
     return model, history
 
 # Results
-def results(model, history, x_test, y_test):
+def results(model, x_test, y_test):
     model_loss, model_acc = model.evaluate(x_test, y_test, verbose=0) # returns loss and accuracy, for only accuracy get the val at index =1
     print("Test Accuracy: {:.3f}%".format(model_acc * 100)) # multiply by 100 to get percentage, and getting 3 decimal places
     print("Test Loss: {:.3f}%".format(model_loss))
@@ -76,13 +77,23 @@ def results(model, history, x_test, y_test):
     # model.predict will return multiple sets of 9 probability values, one for each class
     # np.max will give largest number within the 9 and np.argmax will give the location of the largest number
     # map will apply the lambda function to each element of the list, getting argmax of each set of 9 probabilities, which we turn into a list and then a numpy array
-    y_pred = np.array(list(map(lambda x: np.argmax(x), model.predict(x_test))))
+    y_pred_probabilities = model.predict(x_test)
+    y_pred = np.argmax(y_pred_probabilities, axis=1)
+
+    # Ensure y_test is numpy array
+    y_test = np.array(y_test)
+
+    # Convert numeric labels back to original labels for report
+    label_names = list(labelMap.keys())
+
+    # Generate classification report
+    clr = classification_report(y_test, y_pred, target_names=label_names)
+    print("Classification Report:\n----------------------\n", clr)
 
     # confusion matrix
     cm = confusion_matrix(y_test, y_pred)
-    clr = classification_report(y_test, y_pred, target_names=labelMap.keys())
 
-    plt.figure(figsize=(8, 8))
+    plt.figure(figsize=(10, 12))
     # fmat='g' to make sure that the counts for the classification are not in scientific notation
     sns.heatmap(cm, annot=True, vmin=0, fmt='g', cbar=False, cmap='Blues') # min val=0, cbar=False to remove color bar, cmap=Blues for blue color
     plt.xticks(np.arange(9) + 0.5, labelMap.keys()) # setting the ticks at 0.5, 1.5, 2.5	and values as the keys of the labelMap
@@ -91,8 +102,6 @@ def results(model, history, x_test, y_test):
     plt.ylabel('Actual')
     plt.title('Confusion Matrix')
     plt.show()
-
-    print("Classification Report:\n----------------------\n", clr)
 
 
 # process the data
@@ -118,4 +127,4 @@ x_train, x_test, y_train, y_test = preprocessInputs(eeg_df, labelMap)
 model, history = buildModel(x_train, y_train)
 
 # test the model and get results
-results(model, history, x_test, y_test)
+results(model, x_test, y_test)

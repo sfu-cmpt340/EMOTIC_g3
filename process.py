@@ -8,9 +8,9 @@ def downsample(data, factor):
 def process_training_data():
     # Loop across all 100 subjects (training data)
     eeg_data = []
-    for file_name in os.listdir("Processed_data_train"):
+    for file_name in os.listdir("Processed_data"):
         if file_name.endswith('.pkl'):
-            with open(os.path.join("Processed_data_train", file_name), 'rb') as file:
+            with open(os.path.join("Processed_data", file_name), 'rb') as file:
                 data = pickle.load(file)
 
             # Append the subject arrays together
@@ -19,7 +19,7 @@ def process_training_data():
     # Convert the list of arrays into a single NumPy array
     eeg_data = np.array(eeg_data)  # Shape: (100, num_videos, num_channels, num_timepoints)
 
-    eeg_data = downsample(eeg_data, 4) # A factor of 2 will compress the number of time points by half
+    eeg_data = downsample(eeg_data, 50) # A factor of 2 will compress the number of time points by half
 
     # Get the emotions for each video
     emotions = ["Anger", "Anger", "Anger",
@@ -33,7 +33,7 @@ def process_training_data():
                 "Tenderness", "Tenderness", "Tenderness"]
 
     # Repeat the emotion labels for 100 subjects
-    emotion_labels = np.tile(emotions, (40, 1))
+    emotion_labels = np.tile(emotions, (100, 1))
     labels = emotion_labels.flatten()  # Shape: (100 * 28,)
 
     # Reshape the EEG data
