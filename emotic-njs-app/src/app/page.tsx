@@ -1,14 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import Sidebar from "./components/Sidebar";
+import { useRouter } from "next/navigation";
+import Sidebar from "./components/landing/Sidebar";
 import Image from "next/image";
 import { useLogo } from "./hooks/useLogo";
-import DragAndDropUpload from "./components/DragAndDropUpload"; // Adjust path based on your file structure
+import DragAndDropUpload from "./components/landing/DragAndDropUpload";
 
 export default function LandingPage() {
   const logo = useLogo();
   const [file, setFile] = useState<File | null>(null);
+  const router = useRouter();
 
   const handleFileSelect = (selectedFile: File | null) => {
     setFile(selectedFile);
@@ -21,13 +23,16 @@ export default function LandingPage() {
     formData.append("file", file);
 
     try {
-      const response = await fetch("/upload", {
+      const response = await fetch("http://localhost:5000/upload", {
         method: "POST",
         body: formData,
       });
 
       if (response.ok) {
-        alert("File uploaded successfully!");
+        // If the upload is successful, navigate to the /app page
+        const responseData = await response.json(); // Assuming the server responds with some data
+        const filename = responseData.filename; // Replace this with the actual field from the backend response
+        router.push(`/app?filename=${encodeURIComponent(filename)}`); // Pass filename as query parameter
       } else {
         alert("Error uploading file.");
       }
@@ -39,16 +44,16 @@ export default function LandingPage() {
 
   return (
     <div className="flex">
-      <div className="">
+      <div>
         <Sidebar />
       </div>
-      <div className="flex-1 min-h-screen flex justify-center bg-lightBackground-500 dark:bg-darkBackground-500">
-        <div className="justify-center mt-[15%] font-montserrat font-extralight text-lightText-500 dark:text-darkText-500">
+      <div className="flex-1 min-h-screen pt-[5%] px-[5%] sm:px-[10%] flex justify-center bg-lightBackground-500 dark:bg-darkBackground-500">
+        <div className="justify-center pb-20 font-montserrat font-extralight text-lightText-500 dark:text-darkText-500">
           <div className="flex items-center justify-center">
-            <p className="text-[60px] sm:text-[80px] md:text-[100px] lg:text-[120px]">
+            <p className="text-[45px] sm:text-[65px] md:text-[80px] lg:text-[100px]">
               EMOTIC
             </p>
-            <a href="" target="_blank">
+            <a href="/" target="_blank">
               <Image
                 src={logo}
                 className="h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 ml-4 hover:scale-110 transition-transform duration-200"
