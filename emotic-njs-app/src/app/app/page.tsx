@@ -8,20 +8,19 @@ import { Emotion } from "../config/EmotionsConfig";
 import CircularIndeterminate from "../components/app/CircularIndeterminate";
 import { ClassificationReport, Data } from "../config/interfaces";
 import ClassificationReportDisplay from "../components/app/ClassificationReportDisplay";
-import { mockData } from "../config/mockData";
 
 export default function AppPage() {
   const searchParams = useSearchParams();
-  const filename = searchParams.get("filename"); // TODO: Retrieve filename from query
-  const [emotion, setEmotion] = useState<Emotion | null>(Emotion.Amusement);
-  const [loading, setLoading] = useState(false);
+  const filename = searchParams.get("filename");
+  const [emotion, setEmotion] = useState<Emotion | null>(null);
+  const [loading, setLoading] = useState(true);
 
   // State for classification report and confusion matrix image
   const [classificationReport, setClassificationReport] =
-    useState<ClassificationReport | null>(mockData.classificationReport); //TODO: Replace with retreived data
+    useState<ClassificationReport | null>(null);
   const [confusionMatrixImage, setConfusionMatrixImage] = useState<
     string | null
-  >(mockData.confusionMatrixImage); //TODO: Replace with retreived data
+  >(null);
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -34,8 +33,10 @@ export default function AppPage() {
         });
 
         if (response.ok) {
-          const mockData: Data = await response.json();
-          const emotion = mockData.emotion as Emotion;
+          const data: Data = await response.json();
+
+          // Check for valid emotion
+          const emotion = data.emotion as Emotion;
           if (Object.values(Emotion).includes(emotion)) {
             setEmotion(emotion);
           } else {
@@ -43,12 +44,17 @@ export default function AppPage() {
             setEmotion(null);
           }
 
-          // Assuming the backend returns classification report and confusion matrix URL/image
-          setClassificationReport(mockData.classificationReport);
-          setConfusionMatrixImage(mockData.confusionMatrixImage); // URL to image or base64
+          // Set classification report and confusion matrix image
+          setClassificationReport(data.classificationReport);
+          setConfusionMatrixImage(data.confusionMatrixImage);
+        } else {
+          console.error("Backend error:", await response.text());
+          setEmotion(null);
+          setClassificationReport(null);
+          setConfusionMatrixImage(null);
         }
       } catch (error) {
-        console.error("Error:", error);
+        console.error("Network or processing error:", error);
         setEmotion(null);
         setClassificationReport(null);
         setConfusionMatrixImage(null);
@@ -76,12 +82,12 @@ export default function AppPage() {
               <div className="mb-12">
                 <CircularIndeterminate />
               </div>
-              <p className="text-2xl">Processing EEG mockData...</p>
+              <p className="text-2xl">Processing EEG data...</p>
               <p className="text-lg">This may take a few minutes.</p>
             </>
           ) : emotion ? (
             <>
-              {/* Display the predicted emotion*/}
+              {/* Display the predicted emotion */}
               <EmotionDisplay emotion={emotion} />
               <ClassificationReportDisplay
                 classificationReport={classificationReport}
@@ -89,7 +95,7 @@ export default function AppPage() {
               />
             </>
           ) : (
-            <p>Error: Unable to process emotion mockData.</p>
+            <p>Error: Unable to process EEG data.</p>
           )}
         </div>
       </div>

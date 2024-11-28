@@ -16,7 +16,7 @@ const ClassificationReportDisplay: React.FC<
       <div className="lg:mr-10">
         {classificationReport && (
           <div className="mt-6 w-full max-w-[700px] overflow-x-auto">
-            <h2 className="text-xl font-semibold mb-4">
+            <h2 className="text-xl font-semibold mb-4 flex justify-center">
               Classification Report:
             </h2>
             <table className="table-auto w-full text-md border-collapse">
@@ -56,7 +56,7 @@ const ClassificationReportDisplay: React.FC<
       {/* Display the confusion matrix image */}
       {confusionMatrixImage && (
         <div className="mt-6">
-          <h2 className="text-xl font-semibold mb-4">Confusion Matrix:</h2>
+          <h2 className="text-xl font-semibold mb-4 flex justify-center">Confusion Matrix:</h2>
           <Image
             src={confusionMatrixImage}
             alt="Confusion Matrix"
