@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import FaviconSwitcher from "./components/FaviconSwitcher";
+import FaviconSwitcher from "./components/landing/FaviconSwitcher";
 import ThemeUpdater from "./ThemeUpdater";
+import ThemeProvider from "./ThemeProvider";
 
 export const metadata: Metadata = {
   title: "EMOTIC",
@@ -21,7 +22,9 @@ export default function RootLayout({
       <body>
         <FaviconSwitcher />
         <ThemeUpdater /> {/* TODO: Not sure this is necessary, but it doesn't break the app to keep it so I'm leaving it here */}
-        {children}
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

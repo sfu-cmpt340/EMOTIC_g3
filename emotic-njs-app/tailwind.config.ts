@@ -49,7 +49,19 @@ export default {
         },
         iconDark: {  // Color of icons in dark mode
           500: "#FCFCFC",
-        }
+        },
+        positiveEmo: { // Color of text displaying positive emotions
+          500: "#96FEBE", // Dark mode
+          700: "#00C140", // Light mode
+        },
+        neutralEmo: { // Color of text displaying positive emotions
+          500: "#FFA946", // Dark mode
+          700: "#F88400", // Light mode
+        },
+        negativeEmo: { // Color of text displaying positive emotions
+          500: "#FF5B5B", // Dark mode
+          700: "#E90000", // Light mode
+        },
       },
     },
   },

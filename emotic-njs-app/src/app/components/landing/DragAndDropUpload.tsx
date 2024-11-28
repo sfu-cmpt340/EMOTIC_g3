@@ -50,7 +50,7 @@ const DragAndDropUpload: React.FC<DragAndDropUploadProps> = ({
 
   return (
     <div
-      className={`border-2 border-dashed rounded-lg py-10 px-16 mx-10 flex flex-col items-center justify-center text-center transition-all ${
+      className={`border-2 border-dashed rounded-lg py-10 px-14 sm:py-14 sm:px-24 md:py-20 md:px-28 mx-10 flex flex-col items-center justify-center text-center transition-all ${
         isDragging
           ? "border-lightColorHero-500 dark:border-darkBorder-500 dark:border-opacity-65 bg-lightColorHero-500 bg-opacity-35 dark:bg-darkBackground-300 dark:bg-opacity-65"
           : "border-lightColorHero-500 dark:border-darkText-500"
@@ -66,7 +66,7 @@ const DragAndDropUpload: React.FC<DragAndDropUploadProps> = ({
         htmlFor="file-input"
         className="cursor-pointer mt-2 bg-lightColorHero-500 dark:bg-darkColorHero-500 text-lightText-100 dark:text-darkText-100 font-inter font-medium text-base px-4 py-2 rounded-md"
       >
-        Upload Files
+        Upload File
       </label>
       <input
         id="file-input"
