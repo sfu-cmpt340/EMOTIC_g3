@@ -45,10 +45,10 @@ for img in imgs:
 
 ```bash
 repository
-├── emotic-njs-app               ## frontend
-├── flask                        ## flask backend
+├── backend                      ## Flask backend
     ├── app.py                   ## server
     ├── model.keras              ## trained model
+├── frontend                     ## NextJS frontend
 ├── README.md                    ## You are here
 
 ```
