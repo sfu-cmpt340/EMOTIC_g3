@@ -69,14 +69,20 @@ cd EMOTIC_g3
 #### Frontend (Next.js)
 
 ```bash
-cd emotic-njs-app
+cd frontend
 npm install
+```
+
+Then navigate back to the main directory:
+
+```bash
+cd ..
 ```
 
 #### Backend (Flask)
 
 ```bash
-cd flask
+cd backend
 python3 -m venv .venv
 . .venv/bin/activate
 pip install -r requirements.txt
