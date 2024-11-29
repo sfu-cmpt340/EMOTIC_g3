@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from process_data import preprocess, get_labels
 from sklearn.svm import SVC
-from sklearn.metrics import classification_report, accuracy_score
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
@@ -64,7 +64,7 @@ if __name__ == "__main__":
                 "Tenderness", "Tenderness", "Tenderness"]
 
     # Preprocess data (adjust second parameter to control downsampling)
-    downsample = 10
+    downsample = 50
     eeg_data = preprocess(directory, downsample)
     labels = get_labels(eeg_data.shape[0], emotions)
 
