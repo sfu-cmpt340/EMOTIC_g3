@@ -6,6 +6,7 @@ from sklearn.svm import SVC
 from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
+import pickle
 
 # Function for training the model
 def train_svm_model(eeg_data, labels):
@@ -23,6 +24,10 @@ def train_svm_model(eeg_data, labels):
     # C: Tradeoff between maximizing margins and minimizing misclassifications
     svm = SVC(kernel='linear', C=2.0)
     svm.fit(X_train, y_train)
+
+    # Save model
+    with open('model.pkl','wb') as f:
+         pickle.dump((svm, scaler), f)
 
     # Testing: Make a prediction using the test set
     y_predict = svm.predict(X_valid)
@@ -45,10 +50,12 @@ def classify(svm_model, scaler, csv_path, downsample_factor):
     # Standardize the input data using the scaler from training
     standardized_data = scaler.transform(flattened_data)
 
+
     # Perform classification
     prediction = svm_model.predict(standardized_data)
 
     return prediction
+
 
 # Prepare model for training
 if __name__ == "__main__":
@@ -72,12 +79,16 @@ if __name__ == "__main__":
     num_subjects, num_videos, num_channels, num_timepoints = eeg_data.shape
     reshaped_eeg_data = eeg_data.reshape(-1, num_channels * num_timepoints)
 
-    # Call function to train the Support-Vector-Machine model
-    svm_model, scaler = train_svm_model(reshaped_eeg_data, labels)
+    # Call function to train the Support-Vector-Machine model, comment out if already trained
+    # svm_model, scaler = train_svm_model(reshaped_eeg_data, labels)
 
     # Example: Classify a single input CSV file
-    sample_file = "neutral.csv"
+    sample_file = "amusement.csv"
     sample_path = os.path.join("Sample_data", sample_file)
+     # load pickle file
+    with open('model.pkl', 'rb') as f:
+        svm_model, scaler = pickle.load(f)
+
     prediction = classify(svm_model, scaler, sample_path, downsample)
 
     print("\nPredicted emotion:", prediction)
