@@ -24,6 +24,7 @@ export default function LandingPage() {
   
     try {
       const response = await fetch("http://localhost:5000/upload", {
+        mode: 'no-cors',
         method: "POST",
         body: formData,
       });
