@@ -163,4 +163,7 @@ cython_debug/
 .DS_Store
 
 # dataset directory
+Processed_data_train/
+Processed_data_test/
+Sample_data/
 Processed_data/
