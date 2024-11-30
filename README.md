@@ -78,6 +78,7 @@ cd EMOTIC_g3
 ```bash
 cd frontend
 npm install
+npm i react-icons
 ```
 
 Then navigate back to the main directory:
