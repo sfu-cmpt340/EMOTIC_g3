@@ -18,22 +18,23 @@ export default function LandingPage() {
 
   const handleUpload = async () => {
     if (!file) return alert("Please select a file to upload.");
-
+  
     const formData = new FormData();
     formData.append("file", file);
-
+  
     try {
       const response = await fetch("http://localhost:5000/upload", {
         method: "POST",
         body: formData,
       });
-
+  
       if (response.ok) {
-        // If the upload is successful, navigate to the /app page
-        const responseData = await response.json(); // Assuming the server responds with some data
-        const filename = responseData.filename; // Replace this with the actual field from the backend response
+        const responseData = await response.json(); // Get the response data
+        const filename = responseData.filename; // Extract the filename
         router.push(`/app?filename=${encodeURIComponent(filename)}`); // Pass filename as query parameter
       } else {
+        const error = await response.text();
+        console.error("Backend error:", error);
         alert("Error uploading file.");
       }
     } catch (error) {

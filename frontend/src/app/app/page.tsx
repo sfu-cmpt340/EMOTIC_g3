@@ -24,13 +24,19 @@ export default function AppPage() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ filename }),
         });
-
+  
         if (response.ok) {
           const data = await response.json();
-          const emotion = data.emotion as Emotion;
-
-          if (Object.values(Emotion).includes(emotion)) {
-            setEmotion(emotion);
+          let emotion = data.emotion;
+  
+          // Handle case where emotion is an array
+          if (Array.isArray(emotion)) {
+            emotion = emotion[0]; // Extract the first emotion
+          }
+  
+          // Ensure the emotion matches the Emotion enum
+          if (Object.values(Emotion).includes(emotion as Emotion)) {
+            setEmotion(emotion as Emotion);
           } else {
             console.error("Unexpected emotion value:", emotion);
             setEmotion(null);
@@ -46,7 +52,7 @@ export default function AppPage() {
         setLoading(false); // End loading
       }
     };
-
+  
     if (filename) fetchEmotion();
   }, [filename]);
 
@@ -68,7 +74,7 @@ export default function AppPage() {
               </div>
               <p className="text-2xl font-montserrat">Processing EEG data...</p>
               <p className="text-lg font-montserrat">
-                This may take a few minutes.
+                This may take a moment.
               </p>
             </>
           ) : emotion ? (
