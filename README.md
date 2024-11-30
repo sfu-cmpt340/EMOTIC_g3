@@ -129,17 +129,23 @@ python3 -m venv .venv
 pip install flask flask_cors pandas matplotlib seaborn scikit-learn tensorflow numpy
 ```
 
-#### 2. Download sample data
+#### 2. Download sample data and run
+
+```bash
+wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1DQPpjJIigouQEzcrkb9SQbCOPtSVbP5U' -O sample_data.zip
+unzip sample_data.zip
+python3 svm_model.py
+>> Enter the name of the sample file: filename
+```
+
+`filename` should match any of the 9 csv files in Sample_data
+
+#### Troubleshooting: wget does not work
 
 Data can be found at https://drive.google.com/file/d/1DQPpjJIigouQEzcrkb9SQbCOPtSVbP5U/view?usp=sharing
 
 - Download and unzip in the root directory of this project
 - There should now exist a folder called Sample_data with 9 csv files 
-```bash
-python3 svm_model.py
->> Enter the name of the sample file: filename
-```
-- filename should match any of the 9 csv files in Sample_data
 
 #### 3. Output
 
