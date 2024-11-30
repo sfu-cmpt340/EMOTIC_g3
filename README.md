@@ -19,7 +19,7 @@ https://rdcu.be/d1TNW
 
 
 ## Video/demo/GIF
-Record a short video (1:40 - 2 minutes maximum) or gif or a simple screen recording or even using PowerPoint with audio or with text, showcasing your work.
+https://www.youtube.com/watch?v=b06LVc8NDls
 
 
 ## Table of Contents
