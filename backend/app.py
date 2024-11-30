@@ -13,7 +13,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/upload', methods=['POST'])
-def upload_and_predict():
+def upload():
     if 'file' not in request.files:
         return jsonify({'error': 'No file part in the request'}), 400
     
@@ -25,14 +25,25 @@ def upload_and_predict():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(filepath)
         
-        # Process the CSV file
-        df = pd.read_csv(filepath)
-        summary = df.describe().to_dict()  # Example: return basic stats
-        prediction = predict(filepath)
-        return jsonify({'message': 'File processed successfully!', 'summary': summary, 'prediction': prediction})
+        # Respond with the filename for frontend usage
+        return jsonify({'message': 'File processed successfully!', 'filename': file.filename}), 200
     else:
         return jsonify({'error': 'Invalid file type. Only CSV files are allowed.'}), 400
-    
+
+@app.route('/process', methods=['POST'])
+def process_file():
+    data = request.get_json()
+    filename = data.get("filename")
+    if not filename:
+        return jsonify({'error': 'No filename provided'}), 400
+
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    if not os.path.exists(filepath):
+        return jsonify({'error': 'File not found'}), 404
+
+    prediction = predict(filepath)
+    return jsonify({'emotion': prediction.tolist()})
+
 
 # Function to preprocess and classify a single input CSV file
 def classify(svm_model, scaler, csv_path, downsample_factor):
@@ -58,13 +69,10 @@ def classify(svm_model, scaler, csv_path, downsample_factor):
 # Prepare model for training
 def predict(sample_path):
     downsample = 50
-     # load pickle file
     with open('model.pkl', 'rb') as f:
         svm_model, scaler = pickle.load(f)
-
     prediction = classify(svm_model, scaler, sample_path, downsample)
-
-    return("\nPredicted emotion:", prediction)
+    return prediction
 
 if __name__ == '__main__':
     app.run(debug=True)
