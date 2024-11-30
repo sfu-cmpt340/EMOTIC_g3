@@ -1,6 +1,6 @@
 # SFU CMPT 340 Project - EMOTIC - EEG Monitoring of Thoughts and Individual Conditions
 
-A project using EEG data from the MindWave Mobile 2 to analyze and interpret users' emotional states through neural signal processing and machine learning.
+A project using EEG to analyze and interpret users' emotional states through neural signal processing and machine learning.
 
 ## Team Members
 1. Maisha Supritee Chowdhury
