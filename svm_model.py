@@ -7,6 +7,8 @@ from sklearn.metrics import classification_report, accuracy_score, confusion_mat
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import pickle
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Function for training the model
 def train_svm_model(eeg_data, labels):
@@ -33,6 +35,20 @@ def train_svm_model(eeg_data, labels):
     y_predict = svm.predict(X_valid)
     print("\nClassification Report:\n", classification_report(y_valid, y_predict))
     print("\nAccuracy:", accuracy_score(y_valid, y_predict))
+
+    labelMap = { 'Anger':	0, 'Disgust': 1, 'Fear': 2, 'Sadness': 3, 'Neutral': 4, 'Amusement': 5, 'Inspiration': 6, 'Joy': 7, 'Tenderness': 8 }	
+    # confusion matrix
+    cm = confusion_matrix(y_valid, y_predict)
+
+    plt.figure(figsize=(10, 12))
+    # fmat='g' to make sure that the counts for the classification are not in scientific notation
+    sns.heatmap(cm, annot=True, vmin=0, fmt='g', cbar=False, cmap='Blues') # min val=0, cbar=False to remove color bar, cmap=Blues for blue color
+    plt.xticks(np.arange(9) + 0.5, labelMap.keys()) # setting the ticks at 0.5, 1.5, 2.5	and values as the keys of the labelMap
+    plt.yticks(np.arange(9) + 0.5, labelMap.keys()) 
+    plt.xlabel('Predicted')
+    plt.ylabel('Actual')
+    plt.title('Confusion Matrix')
+    plt.show()
 
     return svm, scaler
 
@@ -80,7 +96,7 @@ if __name__ == "__main__":
     reshaped_eeg_data = eeg_data.reshape(-1, num_channels * num_timepoints)
 
     # Call function to train the Support-Vector-Machine model, comment out if already trained
-    # svm_model, scaler = train_svm_model(reshaped_eeg_data, labels)
+    svm_model, scaler = train_svm_model(reshaped_eeg_data, labels)
 
     # Example: Classify a single input CSV file
     sample_file = "amusement.csv"
