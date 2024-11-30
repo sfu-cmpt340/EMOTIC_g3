@@ -120,7 +120,7 @@ cd frontend
 npm run dev
 ```
 
-Open your browser and navigate to http://localhost:3000/ to use the web application.
+Open your browser and navigate to http://localhost:3000/ to use the web application. Instructions to download data to use with the application can be found below.
 
 ### Running the ML Model Standalone
 
