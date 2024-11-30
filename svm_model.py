@@ -96,10 +96,11 @@ if __name__ == "__main__":
     reshaped_eeg_data = eeg_data.reshape(-1, num_channels * num_timepoints)
 
     # Call function to train the Support-Vector-Machine model, comment out if already trained
-    svm_model, scaler = train_svm_model(reshaped_eeg_data, labels)
+    # svm_model, scaler = train_svm_model(reshaped_eeg_data, labels)
 
     # Example: Classify a single input CSV file
-    sample_file = "amusement.csv"
+    sample_file = input("Enter the name of the sample file: ")
+    sample_file = sample_file + ".csv"
     sample_path = os.path.join("Sample_data", sample_file)
      # load pickle file
     with open('model.pkl', 'rb') as f:

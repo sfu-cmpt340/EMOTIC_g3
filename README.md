@@ -129,32 +129,26 @@ Open your browser and navigate to http://localhost:3000/ to use the web applicat
 
 ### Running the ML Model Standalone
 
-You can run the ML model without the frontend and backend.
-
-#### 1. Navigate to the Backend Folder
+#### 1. Create the venv and install packages from the main directory:
 
 ```bash
-cd backend
-wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1gd-Yq185JqMDNfjOpzwSitxRZQV2VJlg' -O emotic_data.zip
-unzip emotic_data.zip
+python3 -m venv .venv
 . .venv/bin/activate
-python model.py
+pip install flask flask_cors pandas matplotlib seaborn scikit-learn tensorflow numpy
 ```
 
-Data can be found at https://drive.google.com/file/d/1gd-Yq185JqMDNfjOpzwSitxRZQV2VJlg/view?usp=sharing
+#### 2. Download sample data
 
-Output will be saved in..., and displayed in the web app if being run locally.
+Data can be found at https://drive.google.com/file/d/1DQPpjJIigouQEzcrkb9SQbCOPtSVbP5U/view?usp=sharing
 
-<a name="guide"></a>
-## 4. Guidance
+- Download and unzip in the root directory of this project
+- There should now exist a folder called Sample_data with 9 csv files 
+```bash
+python3 svm_model.py
+>> Enter the name of the sample file: filename
+```
+- filename should match any of the 9 csv files in Sample_data
 
-- Use [git](https://git-scm.com/book/en/v2)
-    - Do NOT use history re-editing (rebase)
-    - Commit messages should be informative:
-        - No: 'this should fix it', 'bump' commit messages
-        - Yes: 'Resolve invalid API call in updating X'
-    - Do NOT include IDE folders (.idea), or hidden files. Update your .gitignore where needed.
-    - Do NOT use the repository to upload data
-- Use [VSCode](https://code.visualstudio.com/) or a similarly powerful IDE
-- Use [Copilot for free](https://dev.to/twizelissa/how-to-enable-github-copilot-for-free-as-student-4kal)
-- Sign up for [GitHub Education](https://education.github.com/) 
+#### 3. Output
+
+Running the above python command should now display the predicted emotion of the selected csv data in the terminal
