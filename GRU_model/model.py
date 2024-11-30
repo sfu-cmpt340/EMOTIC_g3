@@ -143,7 +143,7 @@ def results(x_test, y_test, labelMap):
 # preprocess the inputs
 x_train, x_test, y_train, y_test, labelMap = preprocessInputs()
 
-# build the model
+# build the model - commented out to avoid training the model every time
 #model, history = buildModel(x_train, y_train)
 
 # test the model and get results
