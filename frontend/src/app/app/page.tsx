@@ -6,7 +6,7 @@ import EmotionDisplay from "../components/app/EmotionDisplay";
 import { useEffect, useState } from "react";
 import { Emotion } from "../config/EmotionsConfig";
 import CircularIndeterminate from "../components/app/CircularIndeterminate";
-import { ClassificationReport, Data } from "../config/interfaces";
+import { danielData, maishaData } from "../config/reportData";
 import ClassificationReportDisplay from "../components/app/ClassificationReportDisplay";
 
 export default function AppPage() {
@@ -15,16 +15,9 @@ export default function AppPage() {
   const [emotion, setEmotion] = useState<Emotion | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // State for classification report and confusion matrix image
-  const [classificationReport, setClassificationReport] =
-    useState<ClassificationReport | null>(null);
-  const [confusionMatrixImage, setConfusionMatrixImage] = useState<
-    string | null
-  >(null);
-
   useEffect(() => {
-    const fetchResults = async () => {
-      setLoading(true); // Start loading when the request is triggered
+    const fetchEmotion = async () => {
+      setLoading(true); // Start loading
       try {
         const response = await fetch("http://localhost:5000/process", {
           method: "POST",
@@ -33,37 +26,28 @@ export default function AppPage() {
         });
 
         if (response.ok) {
-          const data: Data = await response.json();
-
-          // Check for valid emotion
+          const data = await response.json();
           const emotion = data.emotion as Emotion;
+
           if (Object.values(Emotion).includes(emotion)) {
             setEmotion(emotion);
           } else {
             console.error("Unexpected emotion value:", emotion);
             setEmotion(null);
           }
-
-          // Set classification report and confusion matrix image
-          setClassificationReport(data.classificationReport);
-          setConfusionMatrixImage(data.confusionMatrixImage);
         } else {
           console.error("Backend error:", await response.text());
           setEmotion(null);
-          setClassificationReport(null);
-          setConfusionMatrixImage(null);
         }
       } catch (error) {
         console.error("Network or processing error:", error);
         setEmotion(null);
-        setClassificationReport(null);
-        setConfusionMatrixImage(null);
       } finally {
-        setLoading(false); // End loading when the request is complete
+        setLoading(false); // End loading
       }
     };
 
-    if (filename) fetchResults();
+    if (filename) fetchEmotion();
   }, [filename]);
 
   return (
@@ -83,20 +67,41 @@ export default function AppPage() {
                 <CircularIndeterminate />
               </div>
               <p className="text-2xl font-montserrat">Processing EEG data...</p>
-              <p className="text-lg font-montserrat">This may take a few minutes.</p>
+              <p className="text-lg font-montserrat">
+                This may take a few minutes.
+              </p>
             </>
           ) : emotion ? (
             <>
               {/* Display the predicted emotion */}
               <EmotionDisplay emotion={emotion} />
-              <ClassificationReportDisplay
-                classificationReport={classificationReport}
-                confusionMatrixImage={confusionMatrixImage}
-              />
             </>
           ) : (
             <p>Error: Unable to process EEG data.</p>
           )}
+          <p className="text-lg w-full max-w-[700px] mx-auto mt-20 font-nunitoSans">
+            Below are the results of training the model. We trained two models:
+            the first one, shown below, was trained using a Support Vector
+            Machine (SVM) learning model. The predicted emotion shown above was
+            derived from this model. The second model was trained using a Gated
+            Recurrent Unit (GRU) neural network. We also initially trained a
+            model using K-Nearest Neighbours (KNN), but it is not shown below as
+            it did not fit our use case.
+          </p>
+          <div className="mt-8">
+            {/* Display the hardcoded reports */}
+            <ClassificationReportDisplay
+              modelType="SVM"
+              classificationReport={danielData.classificationReport}
+              confusionMatrixImage={danielData.confusionMatrixImage}
+            />
+            <div className="mt-8"></div>
+            <ClassificationReportDisplay
+              modelType="GRU"
+              classificationReport={maishaData.classificationReport}
+              confusionMatrixImage={maishaData.confusionMatrixImage}
+            />
+          </div>
         </div>
       </div>
     </div>
