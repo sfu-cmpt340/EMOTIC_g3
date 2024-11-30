@@ -47,9 +47,21 @@ for img in imgs:
 repository
 ├── backend                      ## Flask backend
     ├── app.py                   ## server
-    ├── model.keras              ## trained model
+    ├── model.pkl                ## trained svm model
+    ├── requirements.txt         ## required packages for project
 ├── frontend                     ## NextJS frontend
 ├── README.md                    ## You are here
+├── GRU_model                    ## Gated Recurrent Unit model 
+    ├── model.py                 ## model
+    ├── process.py               ## processing data for model
+    ├── predict.py               ## trying to predict with this model
+├── KNN_model                    ## K Nearest Neighbors model
+    ├── knn_model.py             ## model
+    ├── process_data.py          ## processing data for model    
+├── process_data.py              ## process data for main svm model
+├── svm_model.py                 ## main model used for prediction
+├── generate_sample.py           ## generates 1 sample for each emotion to try to predict
+
 
 ```
 
