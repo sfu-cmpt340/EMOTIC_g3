@@ -18,9 +18,6 @@ https://rdcu.be/d1TNW
 |-----------|---------------|-------------------------|-------------------------|
 
 
-## Video/demo/GIF
-https://www.youtube.com/watch?v=b06LVc8NDls
-
 
 ## Table of Contents
 1. [Demo](#demo)
@@ -34,7 +31,7 @@ https://www.youtube.com/watch?v=b06LVc8NDls
 <a name="demo"></a>
 ## 1. Demo video
 
-
+[![Emotic Demo](https://img.youtube.com/vi/b06LVc8NDls/0.jpg)](https://www.youtube.com/watch?v=b06LVc8NDls&ab_channel=RashedHadi)
 
 ### What to find where
 
