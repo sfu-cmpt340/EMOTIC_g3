@@ -1,6 +1,9 @@
 # SFU CMPT 340 Project - EMOTIC - EEG Monitoring of Thoughts and Individual Conditions
 
 A project using EEG to analyze and interpret users' emotional states through neural signal processing and machine learning.
+The collection of EEG data accredited to the authors of <em>A Large Finer-grained Affective Computing EEG Dataset</em>:
+https://rdcu.be/d1TNW
+Chen, J., Wang, X., Huang, C. et al. A Large Finer-grained Affective Computing EEG Dataset. Sci Data 10, 740 (2023). https://doi.org/10.1038/s41597-023-02650-w
 
 ## Team Members
 1. Maisha Supritee Chowdhury
